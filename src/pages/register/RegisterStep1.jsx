@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/RegisterStep1.css";
 import FormField from "../../components/FormField";
 import Toast from "../../components/Toast";
-import { isNicknameAvailable } from "../../services/profileService";
+import { isNicknameAvailable } from "../../services/authService";
 
 function RegisterStep1() {
   const navigate = useNavigate();

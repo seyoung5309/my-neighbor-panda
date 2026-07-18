@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import LoginPage from "./pages/LoginPage.jsx";
 import AuthCallback from "./pages/AuthCallback.jsx";
 import AddIngredientsPage from "./pages/AddIngredientsPage.jsx";
@@ -9,9 +9,21 @@ import ChatPage from "./pages/ChatPage.jsx";
 import ChatRoomPageWrapper from "./pages/ChatRoomPageWrapper.jsx";
 import Navigation from "./components/Navigation.jsx";
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+
+  const hideNavPaths = [
+    "/",
+    "/auth/callback",
+    "/register/step1",
+    "/register/step2",
+    "/register/step3",
+  ];
+
+  const isHideNav = hideNavPaths.includes(location.pathname);
+
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
@@ -22,7 +34,16 @@ function App() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:chatroomId" element={<ChatRoomPageWrapper />} />
       </Routes>
-      <Navigation />
+    
+      {!isHideNav && <Navigation />}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
