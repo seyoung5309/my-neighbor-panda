@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/RegisterStep3.css";
 import Toast from "../../components/Toast";
-import { signUpWithEmail } from "../../services/authService";
+import { getCurrentUser } from "../../services/authService";
 import { updateNickname } from "../../services/profileService";
 import { setLocation } from "../../services/locationService";
 
@@ -30,20 +30,19 @@ function RegisterStep3() {
 
     setIsSubmitting(true);
 
-    // 1. 실제 계정 생성 (이 시점에 처음으로 auth.users + profile row가 생성됨)
-    const { data: signUpData, error: signUpError } = await signUpWithEmail(
-      email,
-      password
-    );
+    // 1. 계정은 Step2에서 이미 생성됨 (signUpWithEmail 호출은 여기서 하지 않음)
+    //    Step2의 signUp 성공 시 Supabase가 자동으로 세션을 만들어주므로,
+    //    여기서는 현재 로그인된 유저 정보만 가져오면 됨.
+    const { user, error: userError } = await getCurrentUser();
 
-    if (signUpError || !signUpData?.user) {
+    if (userError || !user) {
       setIsSubmitting(false);
-      console.error("회원가입 에러 상세내용:", signUpError);
-      setToastMessage("회원가입에 실패했습니다. 다시 시도해주세요.");
+      console.error("유저 조회 에러 상세내용:", userError);
+      setToastMessage("로그인 정보가 없습니다. 처음부터 다시 시도해주세요.");
       return;
     }
 
-    const userId = signUpData.user.id;
+    const userId = user.id;
 
     // 2. Step1에서 고른 닉네임을 실제로 반영
     // (트리거가 만들어준 임시 닉네임을 사용자가 고른 것으로 교체)
@@ -51,6 +50,7 @@ function RegisterStep3() {
 
     if (nicknameError) {
       setIsSubmitting(false);
+      console.error("닉네임 저장 에러 상세내용:", nicknameError);
       setToastMessage("닉네임 저장에 실패했습니다. 다시 시도해주세요.");
       return;
     }

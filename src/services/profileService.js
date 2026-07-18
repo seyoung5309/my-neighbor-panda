@@ -30,7 +30,7 @@ export async function checkNicknameDuplicate(nickname) {
 // 기존에 따로 닉네임을 넣는 로직이 있었거나, step3 등에서 업데이트 할 때
 export const updateNickname = async (userId, nickname) => {
   const { data, error } = await supabase
-    .from("profiles") // 본인의 프로필 테이블명
+    .from("profile") // 본인의 프로필 테이블명
     .upsert(
       {
         id: userId,
