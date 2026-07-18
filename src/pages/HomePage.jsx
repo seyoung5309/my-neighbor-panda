@@ -105,7 +105,7 @@ export default function HomePage() {
           <button
             className="homepage-fab"
             aria-label="추가"
-            onClick={() => navigate("/register/step4")}
+            onClick={() => navigate("/myingredients")}
           >
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
               <path
