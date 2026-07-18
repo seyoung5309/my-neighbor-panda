@@ -1,0 +1,14 @@
+.toast {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: var(--MainColor, #fbc942);
+  color: var(--Black, #383131);
+  text-align: center;
+  font-family: Pretendard, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.75px;
+  box-sizing: border-box;
+}
