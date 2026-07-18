@@ -11,7 +11,7 @@ export default function Navigation() {
     { to: "/chats", label: "채팅", icon: chatIcon },
     { to: "/", label: "홈", icon: homeIcon },
     { to: "/village", label: "마을시장", icon: storeIcon },
-    { to: "/profile", label: "프로필", icon: profileIcon },
+    { to: "/mypage", label: "프로필", icon: profileIcon },
   ];
 
   return (
