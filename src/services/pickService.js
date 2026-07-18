@@ -1,5 +1,6 @@
 // src/services/pickService.js
 import { supabase } from "../lib/supabaseClient";
+import { checkAndUpdateLevel } from "./storeGrowthService";
 
 /**
  * PK-001, PK-004: 상품 PICK
@@ -74,13 +75,17 @@ export async function rejectPick(productId) {
  * PK-004, PK-005: 거래 완료 처리
  * 완료되면 상태가 '거래 완료'로 바뀌고, storeService.getStoreProducts()가
  * pick='대기중'만 조회하도록 되어있어서 자동으로 목록에서 사라집니다.
+ *
+ * GR-001, GR-002: 거래가 완료되는 이 시점이 곧 "식자재를 순환시킨" 시점이므로,
+ * 완료 직후 판매자(item.user_id)의 상점 성장 레벨을 확인/갱신합니다.
+ * 반환값의 `growth.leveledUp`이 true면 GR-003 알림을 화면에서 띄워주시면 됩니다.
  */
 export async function completeTrade(productId) {
   const { data, error } = await supabase
     .from("products")
     .update({ pick: "거래 완료" })
     .eq("id", productId)
-    .select()
+    .select("*, item:item_id ( user_id )")
     .single();
 
   if (error) {
@@ -88,7 +93,16 @@ export async function completeTrade(productId) {
     return { data: null, error };
   }
 
-  return { data, error: null };
+  const sellerId = data.item.user_id;
+  const { data: growthResult, error: growthError } =
+    await checkAndUpdateLevel(sellerId);
+
+  if (growthError) {
+    // 거래 자체는 이미 완료됐으므로, 레벨 갱신 실패는 로그만 남기고 거래 결과는 정상 반환합니다.
+    console.error("상점 성장 레벨 갱신 실패:", growthError.message);
+  }
+
+  return { data, growth: growthResult, error: null };
 }
 
 /**
