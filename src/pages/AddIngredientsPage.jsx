@@ -7,21 +7,20 @@ import PlusButton from "../assets/StepperButton_Plus.svg";
 import MinusButton from "../assets/StepperButton_Minus.svg";
 import Navigation from "../components/Navigation";
 import CategorySelect from "../components/CategorySelect";
+import BottomSheetModal from "../components/BottomSheet";
 import { useState } from "react";
 
 function AddIngredientsPage() {
     let [quantity, setQuantity] = useState(0);
     const [category, setCategory] = useState("");
+    const [open, setOpen] = useState(false);
 
     const PlusQuantity = () => {
-        setQuantity();
-        let set = quantity + 1;
-        setQuantity(set);
+        setQuantity((prev) => prev + 1);
     };
     const MinusQuantity = () => {
-        if (quantity != 0) {
-            let set = quantity - 1;
-            setQuantity(set);
+        if (quantity > 0) {
+            setQuantity((prev) => prev - 1);
         }
     };
 
@@ -40,6 +39,7 @@ function AddIngredientsPage() {
                         <ImageUploadButton
                             src={ImageUpload}
                             alt="사진 업로드"
+                            onClick={() => setOpen(true)}
                         />
                     </ImageDiv>
                     <div className="add-ingredients-page__categoryDiv">
@@ -125,6 +125,7 @@ function AddIngredientsPage() {
                 {/*식자재 등록__입력 폼*/}
             </ContentDiv>
             {/*식자재 등록_콘텐츠*/}
+            <BottomSheetModal open={open} onClose={() => setOpen(false)} />
             <Navigation />/
         </Root>
     );
@@ -155,11 +156,19 @@ const HeaderContent = styled.div`
 const ContentDiv = styled.div`
     display: flex;
     max-width: 354px;
-
     margin-bottom: 70px;
-
     flex-direction: column;
     gap: 40px;
+    align-items: center; /* 추가 */
+`;
+
+const Form = styled.form`
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center; /* 추가 */
 `;
 
 const Title = styled.span`
@@ -180,16 +189,6 @@ const Root = styled.div`
     align-items: center;
 
     background-color: ##fffefa;
-
-    gap: 40px;
-`;
-
-const Form = styled.form`
-    display: flex;
-    width: 100%;
-    height: 100%;
-
-    flex-direction: column;
 
     gap: 40px;
 `;
