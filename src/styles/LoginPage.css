@@ -1,163 +1,163 @@
 .login-page {
-  width: 402px;
-  height: 874px;
-  margin: 0 auto;
-  background: var(--Ivory, #fdfbf5);
-  display: flex;
-  justify-content: center;
-  position: relative;
-  box-sizing: border-box;
+    width: 402px;
+    height: 874px;
+    margin: 0 auto;
+    background: var(--Ivory, #fdfbf5);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    box-sizing: border-box;
 }
 
 .login-page__content {
-  width: 100%;
-  padding: 220px 24px 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    width: 100%;
+    padding: 220px 24px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* 로그인 폼 */
 .login-page__form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
 }
 
 .login-page__field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .login-page__lable {
-  padding: 0 2px;
-  color: var(--Black, #383131);
-  font-family: Pretendard, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -0.75px;
+    padding: 0 2px;
+    color: var(--Black, #383131);
+    font-family: Pretendard, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.75px;
 }
 
 .login-page__input {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid var(--Gray02, #bfb4aa);
-  background: transparent;
-  padding: 4px 2px 10px;
-  box-sizing: border-box;
-  color: var(--Gray02, #bfb4aa);
-  font-family: Pretendard, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -1px;
-  outline: none;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--Gray02, #bfb4aa);
+    background: transparent;
+    padding: 4px 2px 10px;
+    box-sizing: border-box;
+    color: var(--Gray02, #bfb4aa);
+    font-family: Pretendard, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -1px;
+    outline: none;
 }
 
 .login-page__input:focus {
-  border-bottom-color: var(--Black, #383131);
+    border-bottom-color: var(--Black, #383131);
 }
 
 /* 로그인 버튼 */
 .login-page__submit {
-  width: 100%;
-  height: 60px;
-  margin-top: 24px;
-  border: none;
-  border-radius: 6px;
-  background: var(--MainColor, #fbc942);
-  color: var(--Black, #383131);
-  font-family: Pretendard, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -1px;
-  cursor: pointer;
+    width: 100%;
+    height: 60px;
+    margin-top: 24px;
+    border: none;
+    border-radius: 6px;
+    background: var(--MainColor, #fbc942);
+    color: var(--Black, #383131);
+    font-family: Pretendard, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -1px;
+    cursor: pointer;
 }
 
 /* 회원가입 링크 */
 .register {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 16px;
 }
 
 .register-link {
-  background: none;
-  border: none;
-  color: var(--Black, #383131);
-  text-align: center;
-  font-family: Pretendard, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -0.75px;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--Black, #383131);
+    text-align: center;
+    font-family: Pretendard, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.75px;
+    cursor: pointer;
 }
 
 .login-page__vector {
-  width: 16px;
-  height: 16px;
+    width: 16px;
+    height: 16px;
 }
 
 /* 구분선 텍스트 */
 .login-page__divider {
-  margin-top: 140px;
-  padding: 0 2px;
-  color: var(--Gray02, #bfb4aa);
-  text-align: center;
-  font-family: Pretendard, sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: -0.75px;
+    margin-top: 140px;
+    padding: 0 2px;
+    color: var(--Gray02, #bfb4aa);
+    text-align: center;
+    font-family: Pretendard, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.75px;
 }
 
 /* 소셜 로그인 버튼 묶음 */
 .login-page__social {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
 }
 
 .social-btn-kakao,
 .social-btn-naver,
 .social-btn-google {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    flex-shrink: 0;
 }
 
 .social-btn-kakao {
-  background: #fee500;
+    background: #fee500;
 }
 
 .social-btn-naver {
-  background: #03c75a;
+    background: #03c75a;
 }
 
 .social-btn-google {
-  background: #fff;
-  border: 1px solid var(--Gray02, #bfb4aa);
+    background: #fff;
+    border: 1px solid var(--Gray02, #bfb4aa);
 }
 
 .login-social-icon {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
 }
