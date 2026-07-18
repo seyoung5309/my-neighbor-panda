@@ -56,7 +56,13 @@ function RegisterStep2() {
     }
 
     setIsSubmitting(false);
-    navigate("/register/step3", { state: { nickname } });
+    navigate("/register/step3", { 
+    state: { 
+      nickname, 
+      email: email.trim(), 
+      password 
+    } 
+  });
   };
 
   return (
