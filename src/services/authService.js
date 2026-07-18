@@ -11,9 +11,7 @@ export const signUpWithEmail = async (email, password, nickname) => {
     email,
     password,
     options: {
-      data: {
-        nickname: nickname, // 유저 metadata에 닉네임 저장
-      },
+      data: { nickname },
     },
   });
   return { data, error };

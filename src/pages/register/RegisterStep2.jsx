@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/RegisterStep2.css";
 import FormField from "../../components/FormField";
 import Toast from "../../components/Toast";
-// 💡 setNickname 임포트 제거
 import { signUpWithEmail } from "../../services/authService";
 
 function RegisterStep2() {
@@ -34,8 +33,8 @@ function RegisterStep2() {
     }
 
     setIsSubmitting(true);
-    
-    const { data, error: signUpError } = await signUpWithEmail(
+
+    const { error: signUpError } = await signUpWithEmail(
       email.trim(),
       password,
       nickname
