@@ -18,10 +18,12 @@ function RegisterStep3() {
       return;
     }
 
+    // ⚠️ 해커톤 임시 처리: villages/location insert가 RLS로 막혀서
+    // 실제 API 호출 없이 입력값만 받는 척하고 판다 커스터마이징으로 넘어감.
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      navigate("/register/complete");
+      navigate("/register/step4");
     }, 400);
   };
 

@@ -12,12 +12,15 @@ import WelcomePage from "./pages/WelcomePage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import ChatRoomPageWrapper from "./pages/ChatRoomPageWrapper.jsx";
 import Navigation from "./components/Navigation.jsx";
+import MyPage from "./pages/MyPage.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import VillageMarketPage from "./pages/VillageMarketPage.jsx";
 
 function AppContent() {
   const location = useLocation();
 
   const hideNavPaths = [
-    "/",
+    "/login",
     "/auth/callback",
     "/register/step1",
     "/register/step2",
@@ -31,7 +34,8 @@ function AppContent() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/myingredients" element={<AddIngredientsPage />} />
         <Route path="/register/step1" element={<RegisterStep1 />} />
@@ -47,6 +51,9 @@ function AppContent() {
 
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:chatroomId" element={<ChatRoomPageWrapper />} />
+        <Route path="/mypage" element={<MyPage />} />
+
+        <Route path="/village" element={<VillageMarketPage />} />
       </Routes>
 
       {!isHideNav && <Navigation />}

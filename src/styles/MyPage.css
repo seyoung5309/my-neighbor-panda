@@ -1,0 +1,126 @@
+.mypage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #faf7f0;
+  padding-bottom: 90px; /* 하단 네비게이션 높이만큼 여백 */
+  box-sizing: border-box;
+}
+
+.mypage-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px 60px;
+  background-image: url("../assets/mypage-bg.png");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.mypage-nickname {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2b2b2b;
+  margin: 0 0 20px;
+  z-index: 1;
+}
+
+.mypage-panda-wrapper {
+  width: 200px;
+  z-index: 1;
+}
+
+.mypage-level-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 18px 20px;
+  margin: -30px 20px 0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  text-align: left;
+  z-index: 2;
+}
+
+.mypage-level-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mypage-level-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.mypage-level-arrow {
+  color: #b5b5b5;
+  font-size: 18px;
+}
+
+.mypage-progress-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #f1e9e0;
+  overflow: hidden;
+}
+
+.mypage-progress-fill {
+  height: 100%;
+  background: #f4c542;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.mypage-menu-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+}
+
+.mypage-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #f0ebe1;
+  padding: 20px 24px;
+  font-size: 15px;
+  color: #2b2b2b;
+  cursor: pointer;
+  text-align: left;
+}
+
+.mypage-menu-arrow {
+  color: #c4c4c4;
+  font-size: 18px;
+}
+
+.mypage-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #8a8a8a;
+  font-size: 15px;
+  background: #faf7f0;
+}
+
+.mypage-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #8a8a8a;
+  font-size: 15px;
+  background: #faf7f0;
+}
