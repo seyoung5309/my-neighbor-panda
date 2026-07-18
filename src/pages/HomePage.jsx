@@ -41,7 +41,6 @@ export default function HomePage() {
     };
   }, []);
 
-  // TODO: level / level_label / progress / currency 실제 컬럼명 확인 필요
   const level = profile?.level ?? 1;
   const levelLabel = profile?.level_label ?? "땅바닥";
   const progress = profile?.progress ?? 5;
