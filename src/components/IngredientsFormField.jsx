@@ -11,14 +11,15 @@ const Label = styled.label`
     padding: 0 2px;
     color: var(--Black, #383131);
     font-family: Pretendard, sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: -0.75px;
 `;
 
 const Input = styled.input`
-    width: 100%;
+    width: 354px;
+    height: 48px;
     border: none;
     border-bottom: 1px solid var(--Gray02, #bfb4aa);
     background: transparent;
@@ -41,7 +42,7 @@ const Input = styled.input`
     }
 `;
 
-function FormField({
+function IngredientsFormField({
     id,
     label,
     type = "text",
@@ -65,4 +66,4 @@ function FormField({
     );
 }
 
-export default FormField;
+export default IngredientsFormField;
