@@ -74,11 +74,14 @@ export async function setLocation(userId, addressFields) {
 
   const { data, error } = await supabase
     .from("location")
-    .upsert({
-      user_id: userId,
-      ...addressFields,
-      region_key: regionKey,
-    })
+    .upsert(
+      {
+        user_id: userId,
+        ...addressFields,
+        region_key: regionKey,
+      },
+      { onConflict: "user_id" },
+    )
     .select()
     .single();
 
