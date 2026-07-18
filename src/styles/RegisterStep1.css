@@ -32,6 +32,7 @@
   margin-top: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 12px;
 }
 
@@ -40,7 +41,7 @@
   height: 60px;
   border: none;
   border-radius: 6px;
-  background: var(--MainColor, #fbc942);
+  background: var(--MainColor, #f6f1ed);
   color: var(--Black, #383131);
   font-family: Pretendard, sans-serif;
   font-size: 16px;
