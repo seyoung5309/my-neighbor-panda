@@ -15,6 +15,7 @@ import {
   signOut,
   getCurrentUser,
   deleteAccount,
+  naverSignInWithOAuth,
 } from '../services/authService';
 import {
   checkNicknameDuplicate,
@@ -83,6 +84,9 @@ export default function TestPage() {
         </button>
         <button onClick={() => run('카카오 로그인', () => signInWithOAuth('kakao'))}>
           카카오 로그인 (MM-002)
+        </button>
+        <button onClick={() => run('네이버 로그인', () => naverSignInWithOAuth())}>
+            네이버 로그인
         </button>
         <button onClick={() => run('로그아웃', () => signOut())}>
           로그아웃 (MM-004)
