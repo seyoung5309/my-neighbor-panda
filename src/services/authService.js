@@ -158,8 +158,7 @@ export async function setNickname(userId, nickname) {
     .from("profile")
     .update({ nickname })
     .eq("id", userId)
-    .select()
-    .single();
+    .select();
 
   if (error) {
     if (error.code === "23505") {
