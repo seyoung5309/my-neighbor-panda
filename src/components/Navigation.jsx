@@ -8,7 +8,7 @@ import "../styles/components/Navigation.css";
 
 export default function Navigation() {
   const tabs = [
-    { to: "/chats", label: "채팅", icon: chatIcon },
+    { to: "/chat", label: "채팅", icon: chatIcon },
     { to: "/", label: "홈", icon: homeIcon },
     { to: "/village", label: "마을시장", icon: storeIcon },
     { to: "/mypage", label: "프로필", icon: profileIcon },
