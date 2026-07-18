@@ -6,7 +6,7 @@ import PlusButton from "../assets/StepperButton_Plus.svg";
 import MinusButton from "../assets/StepperButton_Minus.svg";
 import Navigation from "../components/Navigation";
 import CategorySelect from "../components/CategorySelect";
-import BottomSheetModal from "../components/BottomSheet";
+import BottomSheetModal from "../components/market/BottomSheet";
 import { useState, useRef } from "react";
 
 // 백엔드 기능 함수 임포트
