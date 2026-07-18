@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
-import CategoryDropdown from "../components/CategoryDropdown";
 import IngredientsFormField from "../components/IngredientsFormField";
 import ImageUpload from "../assets/ImageUpload.svg";
 import PreviousButton from "../components/PreviousButton";
 import PlusButton from "../assets/StepperButton_Plus.svg";
 import MinusButton from "../assets/StepperButton_Minus.svg";
 import Navigation from "../components/Navigation";
+import CategorySelect from "../components/CategorySelect";
 import { useState } from "react";
 
 function AddIngredientsPage() {
     let [quantity, setQuantity] = useState(0);
+    const [category, setCategory] = useState("");
 
     const PlusQuantity = () => {
         setQuantity();
@@ -43,7 +44,30 @@ function AddIngredientsPage() {
                     </ImageDiv>
                     <div className="add-ingredients-page__categoryDiv">
                         <label htmlFor="category">카테고리</label>
-                        <CategoryDropdown name="product_category" />
+                        <CategorySelect
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            placeholder="카테고리"
+                        >
+                            <CategorySelect.Option value="fresh" icon="🥬">
+                                신선식품
+                            </CategorySelect.Option>
+                            <CategorySelect.Option value="seafood" icon="🐟">
+                                수산식품
+                            </CategorySelect.Option>
+                            <CategorySelect.Option value="processed" icon="🥫">
+                                가공식품
+                            </CategorySelect.Option>
+                            <CategorySelect.Option value="livestock" icon="🥩">
+                                축산식품
+                            </CategorySelect.Option>
+                            <CategorySelect.Option value="dairy" icon="🥛">
+                                유제품
+                            </CategorySelect.Option>
+                            <CategorySelect.Option value="etc" icon="⋯">
+                                기타
+                            </CategorySelect.Option>
+                        </CategorySelect>
                     </div>
                     <DateInputDiv className="dateInputDiv">
                         <div className="add-ingredients-page__purchaseDateDiv">
