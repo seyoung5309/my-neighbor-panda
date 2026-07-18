@@ -8,11 +8,16 @@ const ChevronLeftIconRoot = styled.img`
     width: 24px;
     position: relative;
 `;
-const PreviousButton = () => {
+
+const LinkTo = styled(Link)`
+    width: 24px;
+    height: 24px;
+`;
+const PreviousButton = ({ to }) => {
     return (
-        <Link to="/">
+        <LinkTo to={to}>
             <ChevronLeftIconRoot src={PreviousButtonImage} />
-        </Link>
+        </LinkTo>
     );
 };
 export default PreviousButton;
