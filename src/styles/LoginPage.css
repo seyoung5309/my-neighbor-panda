@@ -128,9 +128,7 @@
   margin-top: 20px;
 }
 
-.social-btn-kakao,
-.social-btn-naver,
-.social-btn-google {
+.login-page__social-btn {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -143,15 +141,15 @@
   flex-shrink: 0;
 }
 
-.social-btn-kakao {
+.login-page__social-btn--kakao {
   background: #fee500;
 }
 
-.social-btn-naver {
+.login-page__social-btn--naver {
   background: #03c75a;
 }
 
-.social-btn-google {
+.login-page__social-btn--google {
   background: #fff;
   border: 1px solid var(--Gray02, #bfb4aa);
 }
