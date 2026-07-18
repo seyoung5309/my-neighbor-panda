@@ -4,6 +4,7 @@ import AuthCallback from "./pages/AuthCallback.jsx";
 import AddIngredientsPage from "./pages/AddIngredientsPage.jsx";
 import RegisterStep1 from "./pages/register/RegisterStep1.jsx";
 import RegisterStep2 from "./pages/register/RegisterStep2.jsx";
+import RegisterStep3 from "./pages/register/RegisterStep3.jsx";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/myingredients" element={<AddIngredientsPage />}></Route>
         <Route path="/register/step1" element={<RegisterStep1 />} />
         <Route path="/register/step2" element={<RegisterStep2 />} />
+        <Route path="/register/step3" element={<RegisterStep3 />} />
       </Routes>
     </BrowserRouter>
   );
