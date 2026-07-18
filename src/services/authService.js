@@ -127,6 +127,55 @@ export function onAuthStateChange(callback) {
 }
 
 /**
+ * MM-003: 닉네임 중복 여부 확인
+ * 입력창에서 "중복 확인" 버튼을 누를 때 호출하는 용도입니다.
+ * true면 사용 가능, false면 이미 사용 중인 닉네임입니다.
+ */
+export async function isNicknameAvailable(nickname) {
+  const { data, error } = await supabase
+    .from("profile")
+    .select("id")
+    .eq("nickname", nickname)
+    .maybeSingle();
+
+  if (error) {
+    console.error("닉네임 중복 확인 실패:", error.message);
+    return { available: null, error };
+  }
+
+  return { available: !data, error: null };
+}
+
+/**
+ * MM-003: 닉네임 설정
+ * 회원가입 직후(또는 이후 마이페이지에서) 실제로 닉네임을 저장할 때 사용합니다.
+ * profile.nickname엔 UNIQUE 제약이 걸려있어서, isNicknameAvailable()로 미리
+ * 확인했더라도 그 사이 다른 사용자가 선점했을 경우를 대비해 23505 에러를
+ * 별도 메시지로 잡아줍니다.
+ */
+export async function setNickname(userId, nickname) {
+  const { data, error } = await supabase
+    .from("profile")
+    .update({ nickname })
+    .eq("id", userId)
+    .select()
+    .single();
+
+  if (error) {
+    if (error.code === "23505") {
+      return {
+        data: null,
+        error: new Error("이미 사용 중인 닉네임입니다."),
+      };
+    }
+    console.error("닉네임 설정 실패:", error.message);
+    return { data: null, error };
+  }
+
+  return { data, error: null };
+}
+
+/**
  * MM-007: 회원 탈퇴 (소프트 삭제 방식)
  *
  * auth.users를 실제로 삭제하려면 service_role key가 필요하고,
