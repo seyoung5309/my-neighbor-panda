@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/ChatPage.css";
 import { getMyChatRooms } from "../services/chatService";
 import { supabase } from "../lib/supabaseClient";
 
 function ChatPage() {
+  const navigate = useNavigate();
   const [chatRooms, setChatRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -85,7 +87,10 @@ function ChatPage() {
 
               return (
                 <div key={room.id}>
-                  <div className="box">
+                  <div
+                    className="box"
+                    onClick={() => navigate(`/chat/${room.id}`)}
+                  >
                     <div className="profile-img-wrapper">
                       <div className="avatar">
                         {itemInfo?.img ? (

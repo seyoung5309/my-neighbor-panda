@@ -58,6 +58,34 @@ export async function getMyChatRooms(userId) {
 }
 
 /**
+ * 채팅방 헤더에 표시할 "상대방" 정보 조회
+ * (나를 제외한 나머지 참여자)
+ */
+export async function getOtherParticipant(chatroomId, currentUserId) {
+  const { data, error } = await supabase
+    .from("chat_user")
+    .select(
+      `
+      user_id,
+      profile ( nickname )
+    `,
+    )
+    .eq("chatroom_id", chatroomId);
+
+  if (error) {
+    console.error("상대방 조회 실패:", error.message);
+    return { data: null, error };
+  }
+
+  const other = data.find((user) => user.user_id !== currentUserId);
+
+  return {
+    data: other?.profile ?? null,
+    error: null,
+  };
+}
+
+/**
  * CT-002: 메시지 전송
  */
 export async function sendMessage(chatroomId, userId, comment) {
