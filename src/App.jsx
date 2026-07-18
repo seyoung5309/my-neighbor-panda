@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
-        <Route path="/myingredients" element={<AddIngredientsPage />}></Route>
+        <Route path="/myingredients" element={<AddIngredientsPage />} />
         <Route path="/register/step1" element={<RegisterStep1 />} />
         <Route path="/register/step2" element={<RegisterStep2 />} />
         <Route path="/register/step3" element={<RegisterStep3 />} />
