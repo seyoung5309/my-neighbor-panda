@@ -15,6 +15,7 @@ import Navigation from "./components/Navigation.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import VillageMarketPage from "./pages/VillageMarketPage.jsx";
+import SelectIngredientsPage from "./pages/SelectIngredientsPage.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -38,6 +39,10 @@ function AppContent() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/myingredients" element={<AddIngredientsPage />} />
+        <Route
+          path="/myingredients/select"
+          element={<SelectIngredientsPage />}
+        />
         <Route path="/register/step1" element={<RegisterStep1 />} />
         <Route path="/register/step2" element={<RegisterStep2 />} />
 
