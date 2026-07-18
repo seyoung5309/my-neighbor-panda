@@ -3,7 +3,6 @@ import styled from "styled-components";
 function AddIngredientsPage() {
     return (
         <div className="add-ingredients-page">
-            <input type="color" />
             <header className="add-ingredients-page_header">
                 <button id="add-ingredients-page__previousButton"></button>
                 <span id="add-ingredients-page__title">식자재 등록</span>
