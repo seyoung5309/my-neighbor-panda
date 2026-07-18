@@ -12,6 +12,7 @@ import WelcomePage from "./pages/WelcomePage.jsx";
 import ChatPage from "./pages/ChatPage.jsx";
 import ChatRoomPageWrapper from "./pages/ChatRoomPageWrapper.jsx";
 import Navigation from "./components/Navigation.jsx";
+import MyPage from "./pages/MyPage.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -47,6 +48,7 @@ function AppContent() {
 
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:chatroomId" element={<ChatRoomPageWrapper />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
 
       {!isHideNav && <Navigation />}
