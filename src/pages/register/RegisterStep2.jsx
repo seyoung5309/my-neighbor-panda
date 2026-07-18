@@ -35,15 +35,15 @@ function RegisterStep2() {
     setIsSubmitting(true);
 
     const { error: signUpError } = await signUpWithEmail(
-      email.trim(),
-      password,
-      nickname
+    email.trim(),
+    password,
+    nickname
     );
 
     if (signUpError) {
-      setIsSubmitting(false);
-      setToastMessage(signUpError.message || "회원가입에 실패했습니다.");
-      return;
+    setIsSubmitting(false);
+    setToastMessage(signUpError.message || "회원가입에 실패했습니다.");
+    return; 
     }
 
     // 💡 기존의 복잡했던 setNickname(별도 닉네임 저장) 에러 핸들링 블록을 완전히 제거했습니다.

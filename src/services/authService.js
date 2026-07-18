@@ -11,7 +11,9 @@ export const signUpWithEmail = async (email, password, nickname) => {
     email,
     password,
     options: {
-      data: { nickname },
+      data: {
+        nickname: nickname,
+      },
     },
   });
   return { data, error };
