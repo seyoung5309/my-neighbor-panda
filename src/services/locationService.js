@@ -57,11 +57,22 @@ async function findOrCreateVillage(regionKey, displayName) {
 
 /**
  * MM-005: 회원가입 시 지역 입력 -> 자동 마을 매칭
- * addressFields: { c, n, g, u, m, d }
+ *
+ * ⚠️ 해커톤 데모용 임시 하드코딩:
+ * 사용자가 입력한 값과 상관없이 무조건 "서울특별시 시연군 시연동"으로 고정합니다.
+ * RLS 정책 이슈로 villages insert가 막혀있는 문제를 우회하기 위한 임시 조치이며,
+ * 데모 이후엔 아래 하드코딩 블록을 지우고 원래 addressFields를 쓰면 됩니다.
  */
-export async function setLocation(userId, addressFields) {
-  const regionKey = generateRegionKey(addressFields);
-  const displayName = `${addressFields.d || addressFields.g || addressFields.c} 마을`;
+export async function setLocation(userId) {
+  // 원래 입력값은 무시하고 고정 지역으로 대체
+  const fixedFields = {
+    c: "서울특별시",
+    g: "시연군",
+    d: "시연동",
+  };
+
+  const regionKey = generateRegionKey(fixedFields);
+  const displayName = `${fixedFields.d} 마을`;
 
   const { data: village, error: villageError } = await findOrCreateVillage(
     regionKey,
@@ -77,7 +88,7 @@ export async function setLocation(userId, addressFields) {
     .upsert(
       {
         user_id: userId,
-        ...addressFields,
+        ...fixedFields,
         region_key: regionKey,
       },
       { onConflict: "user_id" },
