@@ -4,7 +4,7 @@ import chatIcon from "../assets/chat.svg";
 import homeIcon from "../assets/home.svg";
 import storeIcon from "../assets/store.svg";
 import profileIcon from "../assets/profile.svg";
-import "../styles/Navigation.css";
+import "../styles/components/Navigation.css";
 
 export default function Navigation() {
   const tabs = [

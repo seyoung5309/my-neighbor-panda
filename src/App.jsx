@@ -1,19 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/LoginPage.jsx";
-import AuthCallback from "./pages/AuthCallback.jsx";
-import AddIngredientsPage from "./pages/AddIngredientsPage.jsx";
+import ChatPage from "./pages/ChatPage.jsx"
+import Navigation from "./components/navigation.jsx";
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<LoginPage />} />
-                <Route path="/auth/callback" element={<AuthCallback />} />
-                <Route
-                    path="/myingredients"
-                    element={<AddIngredientsPage />}
-                ></Route>
+                <Route path="/" element={<ChatPage />} />
             </Routes>
+            <Navigation />
         </BrowserRouter>
     );
 }

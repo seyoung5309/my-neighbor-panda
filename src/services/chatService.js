@@ -5,27 +5,52 @@ import { supabase } from "../lib/supabaseClient";
  * 내가 참여 중인 채팅방 목록 (상품/아이템 정보 함께 조회)
  */
 export async function getMyChatRooms(userId) {
-  const { data, error } = await supabase
+  // 1. 내가 참여하고 있는 chatroom_id 목록을 가져옵니다.
+  const { data: myRooms, error: roomError } = await supabase
     .from("chat_user")
+    .select("chatroom_id")
+    .eq("user_id", userId);
+
+  if (roomError) {
+    console.error("내 채팅방 목록 조회 실패:", roomError.message);
+    return { data: null, error: roomError };
+  }
+
+  // 참여중인 방이 없다면 빈 배열 반환
+  if (!myRooms || myRooms.length === 0) {
+    return { data: [], error: null };
+  }
+
+  const myRoomIds = myRooms.map((r) => r.chatroom_id);
+
+  // 2. 그 chatroom_id들에 속한 '모든' 유저와 방 정보를 다시 조회합니다.
+  // 이렇게 해야 내 ID가 아닌 상대방 ID 정보(2명)가 온전히 묶여서 내려옵니다.
+  const { data, error } = await supabase
+    .from("chat_room")
     .select(
       `
-      chatroom_id,
-      chat_room:chatroom_id (
+      id,
+      created_at,
+      product:product_id (
         id,
-        created_at,
-        product:product_id (
-          id,
-          mileage,
-          pick,
-          item:item_id ( name, img )
-        )
+        mileage,
+        pick,
+        item:item_id ( name, img )
+      ),
+      chat (
+        comment,
+        datetime
+      ),
+      chat_user (
+        user_id,
+        profile ( nickname )
       )
     `,
     )
-    .eq("user_id", userId);
+    .in("id", myRoomIds); // 내가 속한 방 ID 배열로 필터링
 
   if (error) {
-    console.error("채팅방 목록 조회 실패:", error.message);
+    console.error("채팅방 상세 데이터 조회 실패:", error.message);
     return { data: null, error };
   }
 
