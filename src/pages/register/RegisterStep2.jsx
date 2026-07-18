@@ -23,7 +23,7 @@ function RegisterStep3() {
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
-      navigate("/register/welcome");
+      navigate("/register/step3");
     }, 400);
   };
 
