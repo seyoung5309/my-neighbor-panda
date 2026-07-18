@@ -6,19 +6,18 @@ import { supabase } from "../lib/supabaseClient";
  * 회원가입 성공 시 auth.users에 유저가 생성되고,
  * DB 트리거(handle_new_user)가 자동으로 public.profile row를 만들어줍니다.
  */
-export async function signUpWithEmail(email, password) {
+export const signUpWithEmail = async (email, password, nickname) => {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      data: {
+        nickname: nickname, // 유저 metadata에 닉네임 저장
+      },
+    },
   });
-
-  if (error) {
-    console.error("회원가입 실패:", error.message);
-    return { data: null, error };
-  }
-
-  return { data, error: null };
-}
+  return { data, error };
+};
 
 /**
  * MM-004: 이메일/비밀번호 로그인
@@ -156,10 +155,9 @@ export async function isNicknameAvailable(nickname) {
 export async function setNickname(userId, nickname) {
   const { data, error } = await supabase
     .from("profile")
-    .update({ nickname })
+    .upsert({ nickname })
     .eq("id", userId)
-    .select()
-    .single();
+    .select();
 
   if (error) {
     if (error.code === "23505") {

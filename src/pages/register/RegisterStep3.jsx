@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/RegisterStep3.css";
 import Toast from "../../components/Toast";
-import { getCurrentUser } from "../../services/authService";
+import { signUpWithEmail } from "../../services/authService";
+import { updateNickname } from "../../services/profileService";
 import { setLocation } from "../../services/locationService";
 
 function RegisterStep3() {
   const navigate = useNavigate();
+  const routerLocation = useLocation();
+  const { nickname, email, password } = routerLocation.state || {};
 
   const [si, setSi] = useState("");
   const [gun, setGun] = useState("");
@@ -20,16 +23,39 @@ function RegisterStep3() {
       return;
     }
 
-    setIsSubmitting(true);
-
-    const { user, error: userError } = await getCurrentUser();
-    if (userError || !user) {
-      setIsSubmitting(false);
-      setToastMessage("로그인 정보를 확인할 수 없습니다.");
+    if (!nickname || !email || !password) {
+      setToastMessage("이전 단계 정보가 없습니다. 처음부터 다시 시도해주세요.");
       return;
     }
 
-    const { error: locationError } = await setLocation(user.id, {
+    setIsSubmitting(true);
+
+    // 1. 실제 계정 생성 (이 시점에 처음으로 auth.users + profile row가 생성됨)
+    const { data: signUpData, error: signUpError } = await signUpWithEmail(
+      email,
+      password
+    );
+
+    if (signUpError || !signUpData?.user) {
+      setIsSubmitting(false);
+      setToastMessage("회원가입에 실패했습니다. 다시 시도해주세요.");
+      return;
+    }
+
+    const userId = signUpData.user.id;
+
+    // 2. Step1에서 고른 닉네임을 실제로 반영
+    // (트리거가 만들어준 임시 닉네임을 사용자가 고른 것으로 교체)
+    const { error: nicknameError } = await updateNickname(userId, nickname);
+
+    if (nicknameError) {
+      setIsSubmitting(false);
+      setToastMessage("닉네임 저장에 실패했습니다. 다시 시도해주세요.");
+      return;
+    }
+
+    // 3. 지역 저장 (자동으로 마을 매칭/생성됨)
+    const { error: locationError } = await setLocation(userId, {
       c: si.trim(),
       g: gun.trim(),
       d: dong.trim(),
