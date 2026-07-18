@@ -29,8 +29,7 @@ function LoginForm() {
     }
 
     if (data) {
-      // TODO: 실제 홈 라우트 생기면 "/mypage" → 홈 경로로 변경
-      navigate("/mypage");
+      navigate("/");
     }
   };
 

@@ -13,12 +13,13 @@ import ChatPage from "./pages/ChatPage.jsx";
 import ChatRoomPageWrapper from "./pages/ChatRoomPageWrapper.jsx";
 import Navigation from "./components/Navigation.jsx";
 import MyPage from "./pages/MyPage.jsx";
+import HomePage from "./pages/HomePage.jsx";
 
 function AppContent() {
   const location = useLocation();
 
   const hideNavPaths = [
-    "/",
+    "/login",
     "/auth/callback",
     "/register/step1",
     "/register/step2",
@@ -32,7 +33,8 @@ function AppContent() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/myingredients" element={<AddIngredientsPage />} />
         <Route path="/register/step1" element={<RegisterStep1 />} />
