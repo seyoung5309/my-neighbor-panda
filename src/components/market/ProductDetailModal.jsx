@@ -1,6 +1,6 @@
 import { useState } from "react";
-// PK-001: 실제 함수명이 다르면 이 import만 맞춰서 바꿔주세요.
-import { createPickRequest } from "../../services/pickService";
+// 💡 함수명을 실제 존재하는 pickProduct로 변경합니다.
+import { pickProduct } from "../../services/pickService";
 import "../../styles/VillageMarket.css";
 
 function formatKoreanDate(dateStr) {
@@ -24,11 +24,14 @@ export default function ProductDetailModal({
   const handlePick = async () => {
     setIsPicking(true);
     setPickError("");
-    const { error } = await createPickRequest(currentUserId, product.id);
+    
+    // 💡 중요: 함수명을 바꾸고, 인자 순서를 (상품ID, 유저ID) 순으로 뒤집어줍니다!
+    const { error } = await pickProduct(product.id, currentUserId);
     setIsPicking(false);
 
     if (error) {
-      setPickError("PICK에 실패했습니다. 다시 시도해주세요.");
+      // 서비스에서 반환한 "이미 다른 사용자가 PICK했거나..." 에러 메시지를 활용하면 더 좋습니다.
+      setPickError(error.message || "PICK에 실패했습니다. 다시 시도해주세요.");
       return;
     }
     onPicked();

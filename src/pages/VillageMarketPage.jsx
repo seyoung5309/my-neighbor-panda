@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getCurrentUser } from "../../services/authService";
-import { getMyLocation } from "../../services/locationService";
-import { getVillageMarketProducts } from "../../services/marketService";
+import { getCurrentUser } from "../services/authService";
+import { getMyLocation } from "../services/locationService";
+import { getVillageMarketProducts } from "../services/marketService";
 import FilterBottomSheet from "../components/market/FilterBottomSheet";
 import ProductDetailModal from "../components/market/ProductDetailModal";
 import "../styles/VillageMarket.css";
