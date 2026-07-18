@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/LoginPage.jsx';
 import AuthCallback from './pages/AuthCallback.jsx';
+import Navigation from './components/Navigation.jsx';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
       </Routes>
+      <Navigation />
     </BrowserRouter>
   );
 }
