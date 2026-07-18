@@ -1,4 +1,3 @@
-import React from "react";
 import IngredientCard from "./IngredientCard";
 
 // NOTE: these are Figma-hosted temporary asset URLs (expire ~7 days after
