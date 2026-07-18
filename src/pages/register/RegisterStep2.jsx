@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/RegisterStep2.css";
 import FormField from "../../components/FormField";
 import Toast from "../../components/Toast";
-import { signUpWithEmail, setNickname } from "../../services/authService";
+// 💡 setNickname 임포트 제거
+import { signUpWithEmail } from "../../services/authService";
 
 function RegisterStep2() {
   const navigate = useNavigate();
@@ -33,10 +34,11 @@ function RegisterStep2() {
     }
 
     setIsSubmitting(true);
-
+    
     const { data, error: signUpError } = await signUpWithEmail(
       email.trim(),
       password,
+      nickname
     );
 
     if (signUpError) {
@@ -45,24 +47,16 @@ function RegisterStep2() {
       return;
     }
 
-    const userId = data?.user?.id;
-    if (userId) {
-      const { error: nicknameError } = await setNickname(userId, nickname);
-      if (nicknameError) {
-        setIsSubmitting(false);
-        setToastMessage(nicknameError.message);
-        return;
-      }
-    }
-
+    // 💡 기존의 복잡했던 setNickname(별도 닉네임 저장) 에러 핸들링 블록을 완전히 제거했습니다.
+    // 계정 생성과 동시에 닉네임이 기록되므로 바로 다음 스텝으로 안전하게 이동합니다.
     setIsSubmitting(false);
     navigate("/register/step3", { 
-    state: { 
-      nickname, 
-      email: email.trim(), 
-      password 
-    } 
-  });
+      state: { 
+        nickname, 
+        email: email.trim(), 
+        password 
+      } 
+    });
   };
 
   return (
