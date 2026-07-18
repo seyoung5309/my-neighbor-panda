@@ -44,7 +44,7 @@ export async function signInWithEmail(email, password) {
  */
 export async function signInWithOAuth(provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
-    provider, // 'google' | 'kakao' | 'naver' (커스텀 설정 후 사용)
+    provider, // 'google' | 'kakao' | 'custom:naver' (커스텀 설정 후 사용)
     options: {
       redirectTo: `${window.location.origin}/auth/callback`,
       queryParams: {
@@ -52,6 +52,7 @@ export async function signInWithOAuth(provider) {
       },
     },
   });
+  console.log(data.url);
 
   if (error) {
     console.error("소셜 로그인 실패:", error.message);
@@ -59,6 +60,17 @@ export async function signInWithOAuth(provider) {
   }
 
   return { data, error: null };
+}
+
+export async function naverSignInWithOAuth() {
+  const { data, error } = await supabase.functions.invoke("naver-login");
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  window.location.href = data.url;
 }
 
 /**
