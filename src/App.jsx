@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { PandaProvider } from "./context/PandaContext";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -16,9 +17,24 @@ import MyPage from "./pages/MyPage.jsx";
 import MyHistory from "./pages/MyHistory.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import VillageMarketPage from "./pages/VillageMarketPage.jsx";
+import SelectIngredientsPage from "./pages/SelectIngredientsPage.jsx";
+import SplashPage from "./pages/SplashPage.jsx";
 
 function AppContent() {
     const location = useLocation();
+
+    const [showSplash, setShowSplash] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowSplash(false);
+        }, 2500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    if (showSplash) {
+        return <SplashPage />;
+    }
 
     const hideNavPaths = [
         "/login",
@@ -39,32 +55,32 @@ function AppContent() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/auth/callback" element={<AuthCallback />} />
                 <Route path="/myingredients" element={<AddIngredientsPage />} />
+                <Route
+                    path="/myingredients/select"
+                    element={<SelectIngredientsPage />}
+                />
+
                 <Route path="/MyHistory" element={<MyHistory />} />
 
                 <Route path="/register/step1" element={<RegisterStep1 />} />
                 <Route path="/register/step2" element={<RegisterStep2 />} />
-
                 <Route path="/register/step3" element={<RegisterStep3 />} />
                 <Route
                     path="/register/step3/palette"
                     element={<PalettePage />}
                 />
-
                 <Route path="/register/step4" element={<MyCustomPandaPage />} />
                 <Route
                     path="/register/step4/palette"
                     element={<PalettePage />}
                 />
-
                 <Route path="/register/welcome" element={<WelcomePage />} />
-
                 <Route path="/chat" element={<ChatPage />} />
                 <Route
                     path="/chat/:chatroomId"
                     element={<ChatRoomPageWrapper />}
                 />
                 <Route path="/mypage" element={<MyPage />} />
-
                 <Route path="/village" element={<VillageMarketPage />} />
             </Routes>
 

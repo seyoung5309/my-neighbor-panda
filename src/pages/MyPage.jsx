@@ -7,9 +7,17 @@ import Panda from "../components/Panda";
 import "../styles/MyPage.css";
 
 const MENU_ITEMS = [
-  { key: "ingredients", label: "내 식자재 확인하기", path: "/myingredients" },
-  { key: "transactions", label: "내 거래내역 보기", path: "/mypage/transactions" },
-  { key: "settings", label: "설정", path: "/mypage/settings" },
+  {
+    key: "ingredients",
+    label: "내 식자재 확인하기",
+    path: "/myingredients/select",
+  },
+  {
+    key: "transactions",
+    label: "내 거래내역 보기",
+    path: "/mypage/transactions",
+  },
+  { key: "settings", label: "판다 설정", path: "/register/step4" },
 ];
 
 export default function MyPage() {
