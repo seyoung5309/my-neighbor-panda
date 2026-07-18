@@ -40,19 +40,16 @@ export async function signInWithEmail(email, password) {
 /**
  * MM-002: 소셜 로그인
  * provider: 'google' 등 Supabase가 기본 지원하는 provider
- * ㄴ> 프론트에서 어떤 로그인인지 값을 provider로 넘겨 주어야 함. 문자열로.
+ * 카카오/네이버는 Supabase 대시보드에서 Custom OAuth Provider로
+ * 별도 설정이 필요합니다 (기본 목록에 없음).
  */
 export async function signInWithOAuth(provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider, // 'google' | 'kakao' | 'custom:naver' (커스텀 설정 후 사용)
     options: {
       redirectTo: `${window.location.origin}/auth/callback`,
-      queryParams: {
-        locale: "ko",
-      },
     },
   });
-  console.log(data.url);
 
   if (error) {
     console.error("소셜 로그인 실패:", error.message);
@@ -62,15 +59,26 @@ export async function signInWithOAuth(provider) {
   return { data, error: null };
 }
 
-export async function naverSignInWithOAuth() {
-  const { data, error } = await supabase.functions.invoke("naver-login");
+/**
+ * MM-002: 네이버 로그인 시작
+ * client_id, redirect_uri는 공개되어도 되는 정보라서
+ * 별도 서버 없이 브라우저에서 바로 네이버 인증 페이지로 이동시키면 됩니다.
+ * (실제 비밀값인 client_secret은 콜백을 처리하는 서버 함수에서만 사용됩니다.)
+ */
+export function signInWithNaver() {
+  const clientId = import.meta.env.VITE_NAVER_CLIENT_ID;
+  const redirectUri = `${window.location.origin}/api/naver-callback`;
+  // CSRF 방지용 state 값 (원하면 세션/스토리지에 저장 후 콜백에서 검증 가능)
+  const state = crypto.randomUUID();
 
-  if (error) {
-    console.error(error);
-    return;
-  }
+  const authUrl =
+    "https://nid.naver.com/oauth2.0/authorize" +
+    `?response_type=code` +
+    `&client_id=${clientId}` +
+    `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+    `&state=${state}`;
 
-  window.location.href = data.url;
+  window.location.href = authUrl;
 }
 
 /**
