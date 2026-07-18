@@ -156,7 +156,7 @@ export async function isNicknameAvailable(nickname) {
 export async function setNickname(userId, nickname) {
   const { data, error } = await supabase
     .from("profile")
-    .update({ nickname })
+    .upsert({ nickname })
     .eq("id", userId)
     .select();
 
