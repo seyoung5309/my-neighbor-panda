@@ -14,6 +14,7 @@ import ChatRoomPageWrapper from "./pages/ChatRoomPageWrapper.jsx";
 import Navigation from "./components/Navigation.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import VillageMarketPage from "./pages/VillageMarketPage.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -51,6 +52,8 @@ function AppContent() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/chat/:chatroomId" element={<ChatRoomPageWrapper />} />
         <Route path="/mypage" element={<MyPage />} />
+
+        <Route path="/village" element={<VillageMarketPage />} />
       </Routes>
 
       {!isHideNav && <Navigation />}

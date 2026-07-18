@@ -1,0 +1,278 @@
+.village-market {
+    padding: 16px;
+    padding-bottom: 80px;
+    /* 하단 네비게이션 공간 확보 */
+}
+
+.village-market__searchbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.village-market__search-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f4f4f4;
+    border-radius: 20px;
+    padding: 10px 16px;
+}
+
+.village-market__search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+}
+
+.village-market__filter-btn {
+    background: #f4f4f4;
+    border: none;
+    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.market-loading,
+.market-error,
+.market-empty {
+    margin-top: 24px;
+    text-align: center;
+    color: #888;
+}
+
+.market-error {
+    color: #d0342c;
+}
+
+.market-section {
+    margin-top: 24px;
+}
+
+.market-section__title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.market-section__row,
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.market-thumb {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.market-thumb__image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #f4f4f4;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.market-thumb__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.market-thumb__fallback {
+    width: 60%;
+    height: 60%;
+    background: #ddd;
+    border-radius: 8px;
+}
+
+.market-thumb__label {
+    font-size: 13px;
+    color: #333;
+}
+
+/* 바텀 시트 */
+.market-sheet-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: flex-end;
+    z-index: 100;
+}
+
+.market-sheet {
+    width: 100%;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    padding: 12px 20px 24px;
+}
+
+.market-sheet__handle {
+    width: 40px;
+    height: 4px;
+    background: #ccc;
+    border-radius: 2px;
+    margin: 0 auto 16px;
+}
+
+.market-sheet__section {
+    margin-bottom: 20px;
+}
+
+.market-sheet__label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.market-sheet__select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.market-sheet__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.market-chip {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.market-chip--active {
+    background: #ffb800;
+    border-color: #ffb800;
+    color: #fff;
+    font-weight: 600;
+}
+
+.market-sheet__apply {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: #f0f0f0;
+    color: #888;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* 상세 모달 */
+.market-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.market-modal {
+    width: 90%;
+    max-width: 320px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.market-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.market-modal__title {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.market-modal__close {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.market-modal__image-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f4f4f4;
+    margin-bottom: 16px;
+}
+
+.market-modal__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.market-modal__info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.market-modal__info-block {
+    margin-bottom: 12px;
+}
+
+.market-modal__info-label {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 4px;
+}
+
+.market-modal__info-value {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.market-modal__error {
+    color: #d0342c;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.market-modal__pick-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: #ffb800;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+}
