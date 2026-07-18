@@ -1,0 +1,44 @@
+/* src/styles/welcome-page.css */
+
+.welcome-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 96px 24px 32px;
+  background: #faf7f0;
+  box-sizing: border-box;
+}
+
+.welcome-page h1 {
+  font-size: 22px;
+  line-height: 1.4;
+  color: #2b2b2b;
+  font-weight: 700;
+  margin: 0;
+}
+
+.welcome-panda-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-panda {
+  width: 240px;
+}
+
+.welcome-page .start-button {
+  border: none;
+  background: #f4c542;
+  color: #2b2b2b;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.welcome-page .start-button:active {
+  opacity: 0.85;
+}
