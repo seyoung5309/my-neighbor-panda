@@ -1,0 +1,107 @@
+
+.page {
+  min-height: 100vh;
+  background: #FAF6EE;
+  padding: 48px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.page h1 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2B2B2B;
+  line-height: 1.4;
+  margin: 0 0 24px;
+}
+
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #E5E0D5;
+  background: #FFFFFF;
+  color: #6B6B6B;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.option-button:hover {
+  border-color: #D8D2C2;
+}
+
+.option-button.selected {
+  border: 2px solid #4F46E5;
+  background: #eef0ff;
+  color: #4F46E5;
+  font-weight: 600;
+}
+
+/* 판다 미리보기 */
+.panda-preview {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  margin: 24px 0;
+}
+
+.panda-preview svg {
+  width: 180px;
+  height: auto;
+}
+
+
+.next-button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: #E7E2D6;
+  color: #A8A196;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.next-button.active {
+  background: #F5C542;
+  color: #2B2B2B;
+}
+
+.hex-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #E5E0D5;
+  background: #FFFFFF;
+  font-size: 15px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+.hex-input:focus {
+  outline: none;
+  border-color: #B9B2A0;
+}
+
+.confirm-button {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: #F5C542;
+  color: #2B2B2B;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
