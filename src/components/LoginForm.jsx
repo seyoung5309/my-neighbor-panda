@@ -29,7 +29,7 @@ function LoginForm() {
     }
 
     if (data) {
-      navigate("/");
+      navigate("/home");
     }
   };
 

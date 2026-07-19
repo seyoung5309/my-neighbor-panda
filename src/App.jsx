@@ -14,89 +14,78 @@ import ChatPage from "./pages/ChatPage.jsx";
 import ChatRoomPageWrapper from "./pages/ChatRoomPageWrapper.jsx";
 import Navigation from "./components/Navigation.jsx";
 import MyPage from "./pages/MyPage.jsx";
-import MyHistory from "./pages/MyHistory.jsx";
+import MyHistory from "./pages/MyHistory.jsx"; 
 import HomePage from "./pages/HomePage.jsx";
 import VillageMarketPage from "./pages/VillageMarketPage.jsx";
 import SelectIngredientsPage from "./pages/SelectIngredientsPage.jsx";
 import SplashPage from "./pages/SplashPage.jsx";
 
 function AppContent() {
-    const location = useLocation();
+  const location = useLocation();
+  const [showSplash, setShowSplash] = useState(true);
 
-    const [showSplash, setShowSplash] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowSplash(false);
-        }, 2500);
-        return () => clearTimeout(timer);
-    }, []);
+  if (showSplash) {
+    return <SplashPage />;
+  }
 
-    if (showSplash) {
-        return <SplashPage />;
-    }
+  const hideNavPaths = [
+    "/login",
+    "/auth/callback",
+    "/register/step1",
+    "/register/step2",
+    "/register/step3",
+    "/register/step4",
+    "/register/welcome",
+  ];
 
-    const hideNavPaths = [
-        "/login",
-        "/auth/callback",
-        "/register/step1",
-        "/register/step2",
-        "/register/step3",
-        "/register/step4",
-        "/register/welcome",
-    ];
+  const isHideNav = hideNavPaths.includes(location.pathname);
 
-    const isHideNav = hideNavPaths.includes(location.pathname);
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
+        <Route path="/myingredients" element={<AddIngredientsPage />} />
+        <Route
+          path="/myingredients/select"
+          element={<SelectIngredientsPage />}
+        />
+        <Route path="/MyHistory" element={<MyHistory />} />
+        <Route path="/register/step1" element={<RegisterStep1 />} />
+        <Route path="/register/step2" element={<RegisterStep2 />} />
+        <Route path="/register/step3" element={<RegisterStep3 />} />
+        <Route path="/register/step3/palette" element={<PalettePage />} />
+        <Route path="/register/step4" element={<MyCustomPandaPage />} />
+        <Route path="/register/step4/palette" element={<PalettePage />} />
+        <Route path="/register/welcome" element={<WelcomePage />} />
+        <Route path="/chat" element={<ChatPage />} />
+        <Route path="/chat/:chatroomId" element={<ChatRoomPageWrapper />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/village" element={<VillageMarketPage />} />
+      </Routes>
 
-    return (
-        <>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/auth/callback" element={<AuthCallback />} />
-                <Route path="/myingredients" element={<AddIngredientsPage />} />
-                <Route
-                    path="/myingredients/select"
-                    element={<SelectIngredientsPage />}
-                />
-
-                <Route path="/MyHistory" element={<MyHistory />} />
-
-                <Route path="/register/step1" element={<RegisterStep1 />} />
-                <Route path="/register/step2" element={<RegisterStep2 />} />
-                <Route path="/register/step3" element={<RegisterStep3 />} />
-                <Route
-                    path="/register/step3/palette"
-                    element={<PalettePage />}
-                />
-                <Route path="/register/step4" element={<MyCustomPandaPage />} />
-                <Route
-                    path="/register/step4/palette"
-                    element={<PalettePage />}
-                />
-                <Route path="/register/welcome" element={<WelcomePage />} />
-                <Route path="/chat" element={<ChatPage />} />
-                <Route
-                    path="/chat/:chatroomId"
-                    element={<ChatRoomPageWrapper />}
-                />
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/village" element={<VillageMarketPage />} />
-            </Routes>
-
-            {!isHideNav && <Navigation />}
-        </>
-    );
+      {!isHideNav && <Navigation />}
+    </>
+  );
 }
 
 function App() {
-    return (
-        <PandaProvider>
-            <BrowserRouter>
-                <AppContent />
-            </BrowserRouter>
-        </PandaProvider>
-    );
+  return (
+    <PandaProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </PandaProvider>
+  );
 }
 
 export default App;

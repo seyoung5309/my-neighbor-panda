@@ -21,13 +21,9 @@ export default function HomePage() {
         data: { user },
       } = await supabase.auth.getUser();
 
-      if (!user) {
-        if (isMounted) setLoading(false);
-        return;
-      }
+      if (!user) return;
 
       const { data } = await getProfile(user.id);
-
       if (isMounted) {
         setProfile(data);
         setLoading(false);
@@ -35,7 +31,6 @@ export default function HomePage() {
     };
 
     fetchProfile();
-
     return () => {
       isMounted = false;
     };
