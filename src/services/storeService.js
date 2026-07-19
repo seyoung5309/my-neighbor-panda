@@ -1,5 +1,22 @@
 // src/services/storeService.js
 import { supabase } from "../lib/supabaseClient";
+import { MOCK_PRODUCTS } from "./mockData";
+import { getCategoryImage } from "../constants/categoryImages";
+
+/**
+ * items에는 이미지 파일/URL이 아니라 `category` 값만 저장되어 있습니다.
+ * 화면에서 쓸 이미지는 category -> 정적 이미지로 변환해서 붙여줍니다.
+ */
+function attachCategoryImage(product) {
+  if (!product?.item) return product;
+  return {
+    ...product,
+    item: {
+      ...product.item,
+      image: getCategoryImage(product.item.category),
+    },
+  };
+}
 
 /**
  * ST-001, ST-002: 상품 등록 (보관함 아이템 중 일부 수량만 진열 가능)
@@ -50,7 +67,7 @@ export async function listItemForSale(userId, itemId, quantityToList, mileage) {
         name: originalItem.name,
         count: quantityToList,
         storage: originalItem.storage,
-        img: originalItem.img,
+        category: originalItem.category,
         purchase_date: originalItem.purchase_date,
         expiration_date: originalItem.expiration_date,
         user_id: userId,
@@ -123,6 +140,7 @@ export async function cancelListing(productId) {
 
 /**
  * 내가 진열한 상품 목록 (내 상점 관리 화면에서 사용)
+ * Supabase 호출이 실패하거나 결과가 없는 경우, mockData의 MOCK_PRODUCTS로 대체(fallback)합니다.
  */
 export async function getMyListings(userId) {
   const { data, error } = await supabase
@@ -136,16 +154,31 @@ export async function getMyListings(userId) {
     .eq("item.user_id", userId);
 
   if (error) {
-    console.error("내 상품 목록 조회 실패:", error.message);
-    return { data: null, error };
+    console.warn(
+      "내 상품 목록 조회 실패, mock 데이터로 대체합니다:",
+      error.message,
+    );
+    const mockFallback = MOCK_PRODUCTS.filter(
+      (product) => product.item?.user_id === userId,
+    ).map(attachCategoryImage);
+    return { data: mockFallback, error: null };
   }
 
-  return { data, error: null };
+  if (!data || data.length === 0) {
+    console.warn("내 상품 목록이 비어 있어 mock 데이터로 대체합니다.");
+    const mockFallback = MOCK_PRODUCTS.filter(
+      (product) => product.item?.user_id === userId,
+    ).map(attachCategoryImage);
+    return { data: mockFallback, error: null };
+  }
+
+  return { data: data.map(attachCategoryImage), error: null };
 }
 
 /**
  * 특정 사용자의 상점에 진열된 상품 목록 (다른 사람이 마을에서 상점 방문 시 사용)
  * '대기중' 상태만 보여줍니다 (이미 거래된 건 노출 안 함).
+ * Supabase 호출이 실패하거나 결과가 없는 경우, mockData의 MOCK_PRODUCTS로 대체(fallback)합니다.
  */
 export async function getStoreProducts(storeOwnerUserId) {
   const { data, error } = await supabase
@@ -160,15 +193,32 @@ export async function getStoreProducts(storeOwnerUserId) {
     .eq("pick", "대기중");
 
   if (error) {
-    console.error("상점 상품 목록 조회 실패:", error.message);
-    return { data: null, error };
+    console.warn(
+      "상점 상품 목록 조회 실패, mock 데이터로 대체합니다:",
+      error.message,
+    );
+    const mockFallback = MOCK_PRODUCTS.filter(
+      (product) =>
+        product.item?.user_id === storeOwnerUserId && product.pick === "대기중",
+    ).map(attachCategoryImage);
+    return { data: mockFallback, error: null };
   }
 
-  return { data, error: null };
+  if (!data || data.length === 0) {
+    console.warn("상점 상품 목록이 비어 있어 mock 데이터로 대체합니다.");
+    const mockFallback = MOCK_PRODUCTS.filter(
+      (product) =>
+        product.item?.user_id === storeOwnerUserId && product.pick === "대기중",
+    ).map(attachCategoryImage);
+    return { data: mockFallback, error: null };
+  }
+
+  return { data: data.map(attachCategoryImage), error: null };
 }
 
 /**
  * ST-003: 상품 상세 조회 (사진, 구매 날짜, 소비기한, 수량, 보관 상태)
+ * Supabase 호출이 실패하거나 결과가 없는 경우, mockData의 MOCK_PRODUCTS로 대체(fallback)합니다.
  */
 export async function getProductDetail(productId) {
   const { data, error } = await supabase
@@ -183,9 +233,29 @@ export async function getProductDetail(productId) {
     .single();
 
   if (error) {
-    console.error("상품 상세 조회 실패:", error.message);
-    return { data: null, error };
+    console.warn(
+      "상품 상세 조회 실패, mock 데이터로 대체합니다:",
+      error.message,
+    );
+    const mockFallback = MOCK_PRODUCTS.find(
+      (product) => String(product.id) === String(productId),
+    );
+    return {
+      data: mockFallback ? attachCategoryImage(mockFallback) : null,
+      error: null,
+    };
   }
 
-  return { data, error: null };
+  if (!data) {
+    console.warn("상품 상세 데이터가 없어 mock 데이터로 대체합니다.");
+    const mockFallback = MOCK_PRODUCTS.find(
+      (product) => String(product.id) === String(productId),
+    );
+    return {
+      data: mockFallback ? attachCategoryImage(mockFallback) : null,
+      error: null,
+    };
+  }
+
+  return { data: attachCategoryImage(data), error: null };
 }
