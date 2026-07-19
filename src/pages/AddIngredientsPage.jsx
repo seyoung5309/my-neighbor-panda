@@ -29,7 +29,7 @@ function AddIngredientsPage() {
     const fileInputRef = useRef(null);
 
     // 임시 테스트용 유저 ID (실제 서비스에서는 인증된 로그인 유저 ID가 들어갑니다)
-    const currentUserId = "user-1234-5678";
+    const currentUserId = "e8d4ff3a-2189-45aa-9620-b61dcaa857ab";
 
     const PlusQuantity = () => {
         setQuantity((prev) => prev + 1);
